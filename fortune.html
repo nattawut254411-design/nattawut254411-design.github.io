@@ -1,0 +1,403 @@
+<!DOCTYPE html>  <html lang="th">    <head>    
+<meta charset="UTF-8">    
+<title>Fortune Web</title>    
+<meta name="viewport" content="width=device-width, initial-scale=1.0">    
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Prompt:wght@400;600&display=swap" rel="stylesheet">    
+<style>    
+:root{    
+  --bg: linear-gradient(135deg,#1a2a6c,#b21f1f,#fdbb2d);    
+}    
+body{    
+  margin:0;    
+  font-family:"Prompt","Poppins",sans-serif;    
+  background:var(--bg);    
+  min-height:100vh;    
+  display:flex;    
+  justify-content:center;    
+  align-items:center;    
+  color:white;    
+}  /* Splash Screen */  
+#splash{  
+position:fixed;  
+inset:0;  
+background:linear-gradient(135deg,#000,#3a1c71,#d76d77);  
+display:flex;  
+flex-direction:column;  
+justify-content:center;  
+align-items:center;  
+z-index:9999;  
+animation:fade 1s;  
+}  
+#splash h1{  
+font-size:34px;  
+text-shadow:0 0 20px gold;  
+}  
+#splash p{  
+opacity:0.8;  
+margin-top:10px;  
+}  .app{
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(14px);
+width:95%;
+max-width:430px;
+border-radius:28px;
+padding:20px;
+box-shadow:0 0 35px rgba(0,0,0,0.6);
+}
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+h2,h3{
+margin:8px 0;
+text-align:center;
+text-shadow:0 2px 6px rgba(0,0,0,0.7);
+}
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:20px;
+background:linear-gradient(135deg,#ffdd00,#ff9900);
+font-size:18px;
+margin-top:12px;
+cursor:pointer;
+font-weight:600;
+box-shadow:0 4px 12px rgba(0,0,0,0.6);
+}
+button.small{
+width:auto;
+padding:8px 14px;
+font-size:14px;
+}
+
+/* ปุ่มแชร์แบบสวย */
+button.share{
+background:linear-gradient(135deg,#00f2fe,#4facfe);
+color:#003366;
+font-weight:700;
+}
+button.share:hover{
+transform:scale(1.05);
+box-shadow:0 0 15px rgba(0,255,255,0.8);
+}
+
+.card{
+background:linear-gradient(135deg,rgba(255,255,255,0.2),rgba(255,255,255,0.05));
+padding:20px;
+border-radius:18px;
+margin-top:15px;
+min-height:120px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+text-align:center;
+font-size:20px;
+line-height:1.6;
+text-shadow:0 3px 10px rgba(0,0,0,0.9);
+box-shadow:inset 0 0 10px rgba(255,255,255,0.15);
+animation:fade 0.4s;
+}
+.card span.title{
+font-size:22px;
+font-weight:600;
+margin-bottom:6px;
+display:block;
+}
+.hidden{display:none;}
+.stat{font-size:14px;opacity:0.85;margin-top:10px;text-align:center;}
+img.tarot{
+width:100%;
+border-radius:16px;
+margin-top:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.7);
+animation:flip 0.6s;
+}
+
+.three-cards{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:10px;
+}
+.three-cards img{
+width:100%;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.7);
+animation:shuffle 0.6s;
+}
+
+/* กล่องสรุปไพ่ */
+.summary{
+margin-top:15px;
+background:rgba(255,255,255,0.15);
+padding:15px;
+border-radius:14px;
+font-size:16px;
+line-height:1.6;
+text-shadow:0 2px 6px rgba(0,0,0,0.7);
+}
+
+@keyframes fade{
+from{opacity:0;transform:scale(0.9);}
+to{opacity:1;transform:scale(1);}
+}
+@keyframes flip{
+from{transform:rotateY(90deg);}
+to{transform:rotateY(0deg);}
+}
+@keyframes shuffle{
+0%{transform:translateX(0) rotate(0);}
+25%{transform:translateX(-10px) rotate(-5deg);}
+50%{transform:translateX(10px) rotate(5deg);}
+100%{transform:translateX(0) rotate(0);}
+}
+footer{
+margin-top:10px;
+font-size:12px;
+opacity:0.7;
+text-align:center;
+}
+</style>
+
+</head>  <body>    
+<div id="splash">    
+  <h1>🔮 Fortune Web</h1>    
+  <p>พลังคำทำนายกำลังเปิดเผย…</p>    
+</div>  <div class="app hidden" id="app">    
+<div class="topbar">    
+  <h2>🔮 Fortune App</h2>    
+  <button class="small" onclick="toggleSound()" id="soundBtn">🔊</button>    
+</div>  <div id="menu">    
+  <button onclick="goPage('fortune')">ดูดวงวันนี้</button>    
+  <button onclick="goPage('number')">เลขนำโชค</button>    
+  <button onclick="goPage('love')">ความรัก</button>    
+  <button onclick="goPage('money')">การเงินการงาน</button>    
+  <button onclick="goPage('tarot')">ไพ่ทาโรต์</button>    
+  <button onclick="goPage('threeTarot')">🃏 ไพ่ 3 ใบ (อดีต-ปัจจุบัน-อนาคต)</button>    
+  <button class="share" onclick="shareApp()">📤 แชร์เว็บนี้</button>    
+  <div class="stat">✨ จำนวนครั้งที่สุ่ม: <span id="count">0</span></div>    
+  <footer>Fortune Web</footer>    
+</div>  
+
+<div id="fortune" class="hidden">    
+  <h3>🔮 คำทำนายวันนี้</h3>    
+  <button onclick="randomFortune()">สุ่มคำทำนาย</button>    
+  <div id="fortuneResult" class="card">กดปุ่มเพื่อสุ่มคำทำนาย</div>    
+  <button onclick="backMenu()">กลับเมนู</button>    
+</div>  
+
+<div id="number" class="hidden">    
+  <h3>🍀 เลขนำโชค</h3>    
+  <button onclick="randomNumber()">สุ่มเลข</button>    
+  <div id="numberResult" class="card">กดปุ่มเพื่อสุ่มเลข</div>    
+  <button onclick="backMenu()">กลับเมนู</button>    
+</div>  
+
+<div id="love" class="hidden">    
+  <h3>❤️ ความรัก</h3>    
+  <button onclick="randomLove()">สุ่มคำทำนาย</button>    
+  <div id="loveResult" class="card">กดปุ่มเพื่อสุ่มคำทำนาย</div>    
+  <button onclick="backMenu()">กลับเมนู</button>    
+</div>  
+
+<div id="money" class="hidden">    
+  <h3>💰 การเงินการงาน</h3>    
+  <button onclick="randomMoney()">สุ่มคำทำนาย</button>    
+  <div id="moneyResult" class="card">กดปุ่มเพื่อสุ่มคำทำนาย</div>    
+  <button onclick="backMenu()">กลับเมนู</button>    
+</div>  
+
+<div id="tarot" class="hidden">    
+  <h3>🃏 ไพ่ทาโรต์ (78 ใบ)</h3>    
+  <button onclick="randomTarot()">สุ่มไพ่</button>    
+  <img id="tarotImg" class="tarot">    
+  <div id="tarotResult" class="card">กดปุ่มเพื่อสุ่มไพ่</div>    
+  <button onclick="backMenu()">กลับเมนู</button>    
+</div>  
+
+<div id="threeTarot" class="hidden">    
+  <h3>🃏 ไพ่ 3 ใบ (อดีต - ปัจจุบัน - อนาคต)</h3>    
+  <button onclick="randomThreeTarot()">สับไพ่ & เปิดไพ่</button>    
+  <div class="three-cards">    
+    <img id="card1">    
+    <img id="card2">    
+    <img id="card3">    
+  </div>    
+  <div id="threeResult" class="card">กดปุ่มเพื่อเปิดไพ่ 3 ใบ</div>    
+  <div id="threeSummary" class="summary">สรุปความหมายของไพ่ทั้งสามจะปรากฏที่นี่</div>
+  <button onclick="backMenu()">กลับเมนู</button>    
+</div>    
+</div>  
+
+<script>    
+setTimeout(()=>{    
+ document.getElementById("splash").style.display="none";    
+ document.getElementById("app").classList.remove("hidden");    
+ playOpenSound();    
+},2000);    
+
+const fortunes=[
+"วันนี้เหมาะกับการเริ่มต้นใหม่<br>โอกาสดีรออยู่ข้างหน้า",
+"โชคดีจะมาจากคนใกล้ตัว<br>จงเปิดใจรับสิ่งใหม่",
+"การตัดสินใจในวันนี้<br>จะนำพาความสำเร็จ",
+"มีข่าวดีเกี่ยวกับอนาคต<br>จงเชื่อมั่นในตัวเอง",
+"พลังบวกกำลังเข้ามา<br>อย่ากลัวการเปลี่ยนแปลง"
+];
+const loves=[
+"มีคนแอบสนใจคุณ<br>แต่ยังไม่กล้าแสดงออก",
+"ความรักจะเริ่มชัดเจน<br>ถ้าคุณกล้าพูดความจริง",
+"หัวใจจะอบอุ่นขึ้น<br>จากการใส่ใจซึ่งกันและกัน",
+"มีโอกาสพบคนพิเศษ<br>จากสถานที่ไม่คาดคิด"
+];
+const moneys=[
+"การเงินเริ่มดีขึ้น<br>จากความพยายามที่ผ่านมา",
+"มีโอกาสได้เงินเพิ่ม<br>จากงานเสริมหรือโชคเล็กๆ",
+"งานจะก้าวหน้า<br>หากคุณอดทนและตั้งใจ",
+"โชคลาภกำลังมา<br>อย่าลืมแบ่งปันความสุข"
+];
+
+const tarots=[];
+const majorTarotData=[
+["The Fool","การเริ่มต้นใหม่ การผจญภัย ความกล้า","https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg"],
+["The Magician","พลัง ความสามารถ การลงมือทำ","https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg"],
+["The High Priestess","สัญชาตญาณ ความลับ ปัญญาภายใน","https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg"],
+["The Empress","ความรัก ความอุดมสมบูรณ์ การดูแล","https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg"],
+["The Emperor","อำนาจ ความมั่นคง การควบคุม","https://upload.wikimedia.org/wikipedia/commons/c/c3/RWS_Tarot_04_Emperor.jpg"],
+["The Hierophant","ศีลธรรม ประเพณี การเรียนรู้","https://upload.wikimedia.org/wikipedia/commons/8/8d/RWS_Tarot_05_Hierophant.jpg"],
+["The Lovers","ความรัก การตัดสินใจ ความสัมพันธ์","https://upload.wikimedia.org/wikipedia/commons/3/3a/RWS_Tarot_06_Lovers.jpg"],
+["The Chariot","ชัยชนะ ความมุ่งมั่น","https://upload.wikimedia.org/wikipedia/commons/9/9b/RWS_Tarot_07_Chariot.jpg"],
+["Strength","ความอดทน พลังใจ","https://upload.wikimedia.org/wikipedia/commons/f/f5/RWS_Tarot_08_Strength.jpg"],
+["The Hermit","การค้นหาตัวเอง ปัญญา","https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_Hermit.jpg"],
+["Wheel of Fortune","โชคชะตา การเปลี่ยนแปลง","https://upload.wikimedia.org/wikipedia/commons/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg"],
+["Justice","ความยุติธรรม ความถูกต้อง","https://upload.wikimedia.org/wikipedia/commons/e/e0/RWS_Tarot_11_Justice.jpg"],
+["The Hanged Man","การเสียสละ มุมมองใหม่","https://upload.wikimedia.org/wikipedia/commons/2/2b/RWS_Tarot_12_Hanged_Man.jpg"],
+["Death","การเปลี่ยนแปลงใหญ่","https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg"],
+["Temperance","ความสมดุล ความพอดี","https://upload.wikimedia.org/wikipedia/commons/f/f8/RWS_Tarot_14_Temperance.jpg"],
+["The Devil","การยึดติด กิเลส","https://upload.wikimedia.org/wikipedia/commons/5/55/RWS_Tarot_15_Devil.jpg"],
+["The Tower","ความพังทลาย การเปลี่ยนฉับพลัน","https://upload.wikimedia.org/wikipedia/commons/5/53/RWS_Tarot_16_Tower.jpg"],
+["The Star","ความหวัง การเยียวยา","https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_17_Star.jpg"],
+["The Moon","ความสับสน ความไม่แน่นอน","https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg"],
+["The Sun","ความสุข ความสำเร็จ","https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg"],
+["Judgement","การตื่นรู้","https://upload.wikimedia.org/wikipedia/commons/d/dd/RWS_Tarot_20_Judgement.jpg"],
+["The World","ความสมบูรณ์แบบ","https://upload.wikimedia.org/wikipedia/commons/f/ff/RWS_Tarot_21_World.jpg"]
+];
+majorTarotData.forEach(t=>tarots.push({name:t[0],meaning:t[1],img:t[2]}));
+
+const suits=["Wands","Cups","Swords","Pentacles"];
+const suitImages={
+Wands:"https://upload.wikimedia.org/wikipedia/commons/1/11/Wands01.jpg",
+Cups:"https://upload.wikimedia.org/wikipedia/commons/3/36/Cups01.jpg",
+Swords:"https://upload.wikimedia.org/wikipedia/commons/1/1a/Swords01.jpg",
+Pentacles:"https://upload.wikimedia.org/wikipedia/commons/f/fd/Pents01.jpg"
+};
+const suitMeanings={
+Wands:"พลังงาน การงาน ความคิดสร้างสรรค์",
+Cups:"ความรัก อารมณ์ ความรู้สึก",
+Swords:"ความคิด ปัญหา การตัดสินใจ",
+Pentacles:"การเงิน ความมั่นคง การงาน"
+};
+const ranks=["Ace","2","3","4","5","6","7","8","9","10","Page","Knight","Queen","King"];
+ranks.forEach(r=>{
+suits.forEach(s=>{
+tarots.push({
+name:r+" of "+s,
+meaning:r+" แห่ง "+s+" หมายถึง "+suitMeanings[s],
+img:suitImages[s]
+});
+});
+});
+
+let playCount=localStorage.getItem("playCount")||0;
+count.innerText=playCount;
+
+let soundOn=true;
+const audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+
+function playOpenSound(){
+const osc=audioCtx.createOscillator();
+const gain=audioCtx.createGain();
+osc.frequency.value=180;
+gain.gain.value=0.15;
+osc.connect(gain);
+gain.connect(audioCtx.destination);
+osc.start();
+setTimeout(()=>osc.stop(),300);
+}
+function playClick(){
+if(!soundOn)return;
+const osc=audioCtx.createOscillator();
+const gain=audioCtx.createGain();
+osc.frequency.value=260;
+gain.gain.value=0.12;
+osc.connect(gain);
+gain.connect(audioCtx.destination);
+osc.start();
+setTimeout(()=>osc.stop(),120);
+}
+function toggleSound(){
+soundOn=!soundOn;
+soundBtn.innerText=soundOn?"🔊":"🔇";
+}
+function addCount(){
+playCount++;
+localStorage.setItem("playCount",playCount);
+count.innerText=playCount;
+}
+function goPage(p){
+playClick();
+menu.classList.add("hidden");
+document.getElementById(p).classList.remove("hidden");
+}
+function backMenu(){
+playClick();
+["fortune","number","love","money","tarot","threeTarot"].forEach(id=>{
+document.getElementById(id).classList.add("hidden");
+});
+menu.classList.remove("hidden");
+}
+
+function randomFortune(){playClick();addCount();fortuneResult.innerHTML=fortunes[Math.floor(Math.random()*fortunes.length)];}
+function randomNumber(){playClick();addCount();numberResult.innerHTML="<span class='title'>เลขนำโชค</span>"+(Math.floor(Math.random()*900)+100);}
+function randomLove(){playClick();addCount();loveResult.innerHTML=loves[Math.floor(Math.random()*loves.length)];}
+function randomMoney(){playClick();addCount();moneyResult.innerHTML=moneys[Math.floor(Math.random()*moneys.length)];}
+
+function randomTarot(){
+playClick();addCount();
+const t=tarots[Math.floor(Math.random()*tarots.length)];
+tarotImg.src=t.img;
+tarotResult.innerHTML="<span class='title'>"+t.name+"</span>"+t.meaning;
+}
+
+function randomThreeTarot(){
+playClick();addCount();
+let picks=[];
+while(picks.length<3){
+let t=tarots[Math.floor(Math.random()*tarots.length)];
+if(!picks.includes(t)) picks.push(t);
+}
+card1.src=picks[0].img;
+card2.src=picks[1].img;
+card3.src=picks[2].img;
+threeResult.innerHTML=
+"<span class='title'>อดีต: "+picks[0].name+"</span>"+picks[0].meaning+
+"<hr><span class='title'>ปัจจุบัน: "+picks[1].name+"</span>"+picks[1].meaning+
+"<hr><span class='title'>อนาคต: "+picks[2].name+"</span>"+picks[2].meaning;
+
+threeSummary.innerHTML="🔮 ไพ่ทั้งสามใบนี้สะท้อนเส้นทางชีวิตของคุณว่า จากอดีตที่เกี่ยวกับ "+picks[0].meaning+
+" → ปัจจุบันคุณกำลังเผชิญกับ "+picks[1].meaning+
+" และอนาคตมีแนวโน้มไปทาง "+picks[2].meaning+
+" หากตั้งสติและตัดสินใจอย่างรอบคอบ จะช่วยให้ผลลัพธ์ออกมาดีขึ้น";
+}
+
+function shareApp(){
+if(navigator.share){
+navigator.share({title:"Fortune Web",text:"มาดูดวงกัน 🔮",url:location.href});
+}else{
+alert("คัดลอกลิงก์ไปแชร์: "+location.href);
+}
+}
+</script>  </body>
+
+</html>

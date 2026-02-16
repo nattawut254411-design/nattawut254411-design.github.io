@@ -1,66 +1,81 @@
-<!DOCTYPE html>  <html lang="th">    <head>    
-<meta charset="UTF-8">    
-<title>Fortune Web</title>    
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5216646433194660"
-     crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Prompt:wght@400;600&display=swap" rel="stylesheet">    
-<style>    
-  .topnav{
-  background:#1b1c3a;
-  padding:12px;
-  text-align:center;
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Fortune Web</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5216646433194660"
+crossorigin="anonymous"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Prompt:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+.topnav{
+background:#1b1c3a;
+padding:12px;
+text-align:center;
 }
 .topnav a{
-  color:#fff;
-  margin:0 10px;
-  text-decoration:none;
-  font-weight:bold;
+color:#fff;
+margin:0 10px;
+text-decoration:none;
+font-weight:bold;
 }
-.topnav a:hover{
-  color:#ffd700;
+.topnav a:hover{color:#ffd700;}
+
+.intro{
+max-width:800px;
+margin:20px auto;
+padding:20px;
+text-align:center;
 }
-  .intro{
-  max-width:800px;
-  margin:30px auto;
-  padding:20px;
-  text-align:center;
+.intro h1{color:#ffd700;}
+
+:root{
+--bg: linear-gradient(135deg,#1a2a6c,#b21f1f,#fdbb2d);
 }
-.intro h1{
-  color:#ffd700;
+
+body{
+margin:0;
+font-family:"Prompt","Poppins",sans-serif;
+background:var(--bg);
+min-height:100vh;
+display:flex;
+flex-direction:column;
+color:white;
 }
-:root{    
-  --bg: linear-gradient(135deg,#1a2a6c,#b21f1f,#fdbb2d);    
-}    
-body{    
-  margin:0;    
-  font-family:"Prompt","Poppins",sans-serif;    
-  background:var(--bg);    
-  min-height:100vh;    
-  display:flex;    
-  justify-content:center;    
-  align-items:center;    
-  color:white;    
-}  /* Splash Screen */  
-#splash{  
-position:fixed;  
-inset:0;  
-background:linear-gradient(135deg,#000,#3a1c71,#d76d77);  
-display:flex;  
-flex-direction:column;  
-justify-content:center;  
-align-items:center;  
-z-index:9999;  
-animation:fade 1s;  
-}  
-#splash h1{  
-font-size:34px;  
-text-shadow:0 0 20px gold;  
-}  
-#splash p{  
-opacity:0.8;  
-margin-top:10px;  
-}  .app{
+
+/* Splash Screen */
+#splash{
+position:fixed;
+inset:0;
+background:linear-gradient(135deg,#000,#3a1c71,#d76d77);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:9999;
+animation:fade 1s;
+}
+#splash h1{
+font-size:34px;
+text-shadow:0 0 20px gold;
+}
+#splash p{
+opacity:0.8;
+margin-top:10px;
+}
+
+.main-wrapper{
+flex:1;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+}
+
+.app{
 background:rgba(0,0,0,0.5);
 backdrop-filter:blur(14px);
 width:95%;
@@ -69,16 +84,19 @@ border-radius:28px;
 padding:20px;
 box-shadow:0 0 35px rgba(0,0,0,0.6);
 }
+
 .topbar{
 display:flex;
 justify-content:space-between;
 align-items:center;
 }
+
 h2,h3{
 margin:8px 0;
 text-align:center;
 text-shadow:0 2px 6px rgba(0,0,0,0.7);
 }
+
 button{
 width:100%;
 padding:14px;
@@ -97,7 +115,7 @@ padding:8px 14px;
 font-size:14px;
 }
 
-/* ปุ่มแชร์แบบสวย */
+/* ปุ่มแชร์ */
 button.share{
 background:linear-gradient(135deg,#00f2fe,#4facfe);
 color:#003366;
@@ -130,8 +148,10 @@ font-weight:600;
 margin-bottom:6px;
 display:block;
 }
+
 .hidden{display:none;}
 .stat{font-size:14px;opacity:0.85;margin-top:10px;text-align:center;}
+
 img.tarot{
 width:100%;
 border-radius:16px;
@@ -153,7 +173,6 @@ box-shadow:0 4px 10px rgba(0,0,0,0.7);
 animation:shuffle 0.6s;
 }
 
-/* กล่องสรุปไพ่ */
 .summary{
 margin-top:15px;
 background:rgba(255,255,255,0.15);
@@ -162,6 +181,14 @@ border-radius:14px;
 font-size:16px;
 line-height:1.6;
 text-shadow:0 2px 6px rgba(0,0,0,0.7);
+}
+
+footer{
+background:#1b1c3a;
+font-size:12px;
+opacity:0.7;
+text-align:center;
+padding:10px;
 }
 
 @keyframes fade{
@@ -178,105 +205,111 @@ to{transform:rotateY(0deg);}
 50%{transform:translateX(10px) rotate(5deg);}
 100%{transform:translateX(0) rotate(0);}
 }
-footer{
-margin-top:10px;
-font-size:12px;
-opacity:0.7;
-text-align:center;
-}
 </style>
+</head>
 
-</head>  <body>    
+<body>
+
 <nav class="topnav">
-  <a href="index.html">หน้าแรก</a>
-  <a href="about.html">เกี่ยวกับเรา</a>
-  <a href="privacy.html">นโยบายความเป็นส่วนตัว</a>
-  <a href="contact.html">ติดต่อเรา</a>
+<a href="index.html">หน้าแรก</a>
+<a href="about.html">เกี่ยวกับเรา</a>
+<a href="privacy.html">นโยบายความเป็นส่วนตัว</a>
+<a href="contact.html">ติดต่อเรา</a>
 </nav>
-  <section class="intro">
-  <h1>🔮 Fortune App</h1>
-  <p>
-    เว็บดูดวงออนไลน์เพื่อความบันเทิง  
-    รวมคำทำนายด้านความรัก การงาน การเงิน และไพ่ทาโรต์  
-    ใช้งานง่าย รองรับมือถือและคอมพิวเตอร์
-  </p>
-  </section>
-  
-<div id="splash">    
-  <h1>🔮 Fortune Web</h1>    
-  <p>พลังคำทำนายกำลังเปิดเผย…</p>    
-</div>  <div class="app hidden" id="app">    
-<div class="topbar">    
-  <h2>🔮 Fortune App</h2>    
-  <button class="small" onclick="toggleSound()" id="soundBtn">🔊</button>    
-</div>  <div id="menu">    
-  <button onclick="goPage('fortune')">ดูดวงวันนี้</button>    
-  <button onclick="goPage('number')">เลขนำโชค</button>    
-  <button onclick="goPage('love')">ความรัก</button>    
-  <button onclick="goPage('money')">การเงินการงาน</button>    
-  <button onclick="goPage('tarot')">ไพ่ทาโรต์</button>    
-  <button onclick="goPage('threeTarot')">🃏 ไพ่ 3 ใบ (อดีต-ปัจจุบัน-อนาคต)</button>    
-  <button class="share" onclick="shareApp()">📤 แชร์เว็บนี้</button>    
-  <div class="stat">✨ จำนวนครั้งที่สุ่ม: <span id="count">0</span></div>    
-  <footer>Fortune Web</footer>    
-</div>  
 
-<div id="fortune" class="hidden">    
-  <h3>🔮 คำทำนายวันนี้</h3>    
-  <button onclick="randomFortune()">สุ่มคำทำนาย</button>    
-  <div id="fortuneResult" class="card">กดปุ่มเพื่อสุ่มคำทำนาย</div>    
-  <button onclick="backMenu()">กลับเมนู</button>    
-</div>  
+<div class="main-wrapper">
 
-<div id="number" class="hidden">    
-  <h3>🍀 เลขนำโชค</h3>    
-  <button onclick="randomNumber()">สุ่มเลข</button>    
-  <div id="numberResult" class="card">กดปุ่มเพื่อสุ่มเลข</div>    
-  <button onclick="backMenu()">กลับเมนู</button>    
-</div>  
+<section class="intro">
+<h1>🔮 Fortune App</h1>
+<p>
+เว็บดูดวงออนไลน์เพื่อความบันเทิง  
+รวมคำทำนายด้านความรัก การงาน การเงิน และไพ่ทาโรต์  
+ใช้งานง่าย รองรับมือถือและคอมพิวเตอร์
+</p>
+</section>
 
-<div id="love" class="hidden">    
-  <h3>❤️ ความรัก</h3>    
-  <button onclick="randomLove()">สุ่มคำทำนาย</button>    
-  <div id="loveResult" class="card">กดปุ่มเพื่อสุ่มคำทำนาย</div>    
-  <button onclick="backMenu()">กลับเมนู</button>    
-</div>  
+<div id="splash">
+<h1>🔮 Fortune Web</h1>
+<p>พลังคำทำนายกำลังเปิดเผย…</p>
+</div>
 
-<div id="money" class="hidden">    
-  <h3>💰 การเงินการงาน</h3>    
-  <button onclick="randomMoney()">สุ่มคำทำนาย</button>    
-  <div id="moneyResult" class="card">กดปุ่มเพื่อสุ่มคำทำนาย</div>    
-  <button onclick="backMenu()">กลับเมนู</button>    
-</div>  
+<div class="app hidden" id="app">
+<div class="topbar">
+<h2>🔮 Fortune App</h2>
+<button class="small" onclick="toggleSound()" id="soundBtn">🔊</button>
+</div>
 
-<div id="tarot" class="hidden">    
-  <h3>🃏 ไพ่ทาโรต์ (78 ใบ)</h3>    
-  <button onclick="randomTarot()">สุ่มไพ่</button>    
-  <img id="tarotImg" class="tarot">    
-  <div id="tarotResult" class="card">กดปุ่มเพื่อสุ่มไพ่</div>    
-  <button onclick="backMenu()">กลับเมนู</button>    
-</div>  
+<div id="menu">
+<button onclick="goPage('fortune')">ดูดวงวันนี้</button>
+<button onclick="goPage('number')">เลขนำโชค</button>
+<button onclick="goPage('love')">ความรัก</button>
+<button onclick="goPage('money')">การเงินการงาน</button>
+<button onclick="goPage('tarot')">ไพ่ทาโรต์</button>
+<button onclick="goPage('threeTarot')">🃏 ไพ่ 3 ใบ (อดีต-ปัจจุบัน-อนาคต)</button>
+<button class="share" onclick="shareApp()">📤 แชร์เว็บนี้</button>
+<div class="stat">✨ จำนวนครั้งที่สุ่ม: <span id="count">0</span></div>
+</div>
 
-<div id="threeTarot" class="hidden">    
-  <h3>🃏 ไพ่ 3 ใบ (อดีต - ปัจจุบัน - อนาคต)</h3>    
-  <button onclick="randomThreeTarot()">สับไพ่ & เปิดไพ่</button>    
-  <div class="three-cards">    
-    <img id="card1">    
-    <img id="card2">    
-    <img id="card3">    
-  </div>    
-  <div id="threeResult" class="card">กดปุ่มเพื่อเปิดไพ่ 3 ใบ</div>    
-  <div id="threeSummary" class="summary">สรุปความหมายของไพ่ทั้งสามจะปรากฏที่นี่</div>
-  <button onclick="backMenu()">กลับเมนู</button>    
-</div>    
-</div>  
+<div id="fortune" class="hidden">
+<h3>🔮 คำทำนายวันนี้</h3>
+<button onclick="randomFortune()">สุ่มคำทำนาย</button>
+<div id="fortuneResult" class="card">กดปุ่มเพื่อสุ่มคำทำนาย</div>
+<button onclick="backMenu()">กลับเมนู</button>
+</div>
 
-<script>    
-setTimeout(()=>{    
- document.getElementById("splash").style.display="none";    
- document.getElementById("app").classList.remove("hidden");    
- playOpenSound();    
-},2000);    
+<div id="number" class="hidden">
+<h3>🍀 เลขนำโชค</h3>
+<button onclick="randomNumber()">สุ่มเลข</button>
+<div id="numberResult" class="card">กดปุ่มเพื่อสุ่มเลข</div>
+<button onclick="backMenu()">กลับเมนู</button>
+</div>
+
+<div id="love" class="hidden">
+<h3>❤️ ความรัก</h3>
+<button onclick="randomLove()">สุ่มคำทำนาย</button>
+<div id="loveResult" class="card">กดปุ่มเพื่อสุ่มคำทำนาย</div>
+<button onclick="backMenu()">กลับเมนู</button>
+</div>
+
+<div id="money" class="hidden">
+<h3>💰 การเงินการงาน</h3>
+<button onclick="randomMoney()">สุ่มคำทำนาย</button>
+<div id="moneyResult" class="card">กดปุ่มเพื่อสุ่มคำทำนาย</div>
+<button onclick="backMenu()">กลับเมนู</button>
+</div>
+
+<div id="tarot" class="hidden">
+<h3>🃏 ไพ่ทาโรต์ (78 ใบ)</h3>
+<button onclick="randomTarot()">สุ่มไพ่</button>
+<img id="tarotImg" class="tarot">
+<div id="tarotResult" class="card">กดปุ่มเพื่อสุ่มไพ่</div>
+<button onclick="backMenu()">กลับเมนู</button>
+</div>
+
+<div id="threeTarot" class="hidden">
+<h3>🃏 ไพ่ 3 ใบ (อดีต - ปัจจุบัน - อนาคต)</h3>
+<button onclick="randomThreeTarot()">สับไพ่ & เปิดไพ่</button>
+<div class="three-cards">
+<img id="card1">
+<img id="card2">
+<img id="card3">
+</div>
+<div id="threeResult" class="card">กดปุ่มเพื่อเปิดไพ่ 3 ใบ</div>
+<div id="threeSummary" class="summary">สรุปความหมายของไพ่ทั้งสามจะปรากฏที่นี่</div>
+<button onclick="backMenu()">กลับเมนู</button>
+</div>
+
+</div>
+</div>
+
+<footer>Fortune Web</footer>
+
+<script>
+setTimeout(()=>{
+document.getElementById("splash").style.display="none";
+document.getElementById("app").classList.remove("hidden");
+playOpenSound();
+},2000);
 
 const fortunes=[
 "วันนี้เหมาะกับการเริ่มต้นใหม่<br>โอกาสดีรออยู่ข้างหน้า",
@@ -438,6 +471,7 @@ navigator.share({title:"Fortune Web",text:"มาดูดวงกัน 🔮",
 alert("คัดลอกลิงก์ไปแชร์: "+location.href);
 }
 }
-</script>  </body>
+</script>
 
+</body>
 </html>
